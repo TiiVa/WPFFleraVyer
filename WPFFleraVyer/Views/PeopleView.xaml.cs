@@ -46,6 +46,8 @@ namespace WPFFleraVyer.Views
 
             SelectedPerson.FirstName = EditFirstName;
             SelectedPerson.LastName = EditLastName;
+
+            _repo.UpdateLastNameForPerson(SelectedPerson.FirstName, EditLastName);
         }
 
         private void AddPersonBtn_OnClick(object sender, RoutedEventArgs e)
@@ -65,6 +67,7 @@ namespace WPFFleraVyer.Views
                 return;
             }
 
+            _repo.DeletePerson(SelectedPerson.FirstName);
             PeopleList.Remove(SelectedPerson);
         }
     }

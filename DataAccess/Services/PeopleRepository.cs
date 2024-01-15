@@ -38,4 +38,22 @@ public class PeopleRepository
         var allPeople = _people.Find(filter).ToList();
         return allPeople;
     }
+
+    public Person UpdateLastNameForPerson(string firstName, string newLastName)
+    {
+        var filter = Builders<Person>.Filter
+            .Eq("FirstName", firstName);
+        var update = Builders<Person>.Update
+            .Set(person => person.LastName, newLastName);
+
+        _people.UpdateOne(filter, update);
+
+        return _people.Find(filter).FirstOrDefault();
+    }
+
+    public void DeletePerson(string firstName)
+    {
+        var filter = Builders<Person>.Filter.Eq("FirstName", firstName);
+        _people.DeleteOne(filter);
+    }
 }
