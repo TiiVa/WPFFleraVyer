@@ -6,6 +6,8 @@ namespace WPFFleraVyer.Models;
 
 public class PersonModel : INotifyPropertyChanged
 {
+    public string Id { get; set; }
+
     private string _firstName;
 
     public string FirstName

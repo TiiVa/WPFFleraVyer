@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
+using Common.DTOs;
 using DataAccess.Services;
 using WPFFleraVyer.Models;
 
@@ -13,9 +14,9 @@ namespace WPFFleraVyer.Views
     {
         private readonly PeopleRepository _repo;
 
-        public ObservableCollection<PersonModel> PeopleList { get; set; } = new ();
+        public ObservableCollection<PersonModel> PeopleList { get; set; } = new();
 
-        public PersonModel? SelectedPerson { get; set; } = new ();
+        public PersonModel? SelectedPerson { get; set; } = new();
 
         public string EditFirstName { get; set; } = string.Empty;
 
@@ -33,7 +34,13 @@ namespace WPFFleraVyer.Views
 
             foreach (var person in allAllPeople)
             {
-                PeopleList.Add(new PersonModel(){FirstName = person.FirstName, LastName = person.LastName});
+                PeopleList.Add(
+                    new PersonModel()
+                    {
+                        Id = person.Id,
+                        FirstName = person.FirstName,
+                        LastName = person.LastName
+                    });
             }
         }
 
@@ -47,7 +54,7 @@ namespace WPFFleraVyer.Views
             SelectedPerson.FirstName = EditFirstName;
             SelectedPerson.LastName = EditLastName;
 
-            _repo.UpdateLastNameForPerson(SelectedPerson.FirstName, EditLastName);
+            _repo.UpdateLastNameForPerson(SelectedPerson.Id, EditLastName);
         }
 
         private void AddPersonBtn_OnClick(object sender, RoutedEventArgs e)
@@ -55,9 +62,10 @@ namespace WPFFleraVyer.Views
             var newPerson = new PersonModel();
             newPerson.FirstName = EditFirstName;
             newPerson.LastName = EditLastName;
+            var personRecord = new PersonRecord("", EditFirstName, EditLastName);
             PeopleList.Add(newPerson);
 
-            var id = _repo.AddPerson(newPerson.FirstName, newPerson.LastName);
+            _repo.AddPerson(personRecord);
         }
 
         private void RemovePersonBtn_OnClick(object sender, RoutedEventArgs e)
@@ -67,7 +75,7 @@ namespace WPFFleraVyer.Views
                 return;
             }
 
-            _repo.DeletePerson(SelectedPerson.FirstName);
+            _repo.DeletePerson(SelectedPerson.Id);
             PeopleList.Remove(SelectedPerson);
         }
     }

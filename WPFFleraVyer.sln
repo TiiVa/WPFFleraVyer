@@ -5,7 +5,9 @@ VisualStudioVersion = 17.7.34202.233
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WPFFleraVyer", "WPFFleraVyer\WPFFleraVyer.csproj", "{ECDCDA72-A1AE-4D2F-AC62-AD599D431DC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{6B65EB04-E956-4D5E-9D10-FEDB45D988E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "DataAccess\DataAccess.csproj", "{6B65EB04-E956-4D5E-9D10-FEDB45D988E6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{C61B2C9D-0A87-4793-A2FF-10D686378017}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{6B65EB04-E956-4D5E-9D10-FEDB45D988E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B65EB04-E956-4D5E-9D10-FEDB45D988E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B65EB04-E956-4D5E-9D10-FEDB45D988E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C61B2C9D-0A87-4793-A2FF-10D686378017}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C61B2C9D-0A87-4793-A2FF-10D686378017}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C61B2C9D-0A87-4793-A2FF-10D686378017}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C61B2C9D-0A87-4793-A2FF-10D686378017}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
