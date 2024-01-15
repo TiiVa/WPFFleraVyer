@@ -1,19 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using DataAccess.Services;
 using WPFFleraVyer.Models;
 
 namespace WPFFleraVyer.Views
@@ -23,6 +11,8 @@ namespace WPFFleraVyer.Views
     /// </summary>
     public partial class PeopleView : UserControl
     {
+        private readonly PeopleRepository _repo;
+
         public ObservableCollection<PersonModel> PeopleList { get; set; } = new ();
 
         public PersonModel? SelectedPerson { get; set; } = new ();
@@ -37,8 +27,14 @@ namespace WPFFleraVyer.Views
 
             DataContext = this;
 
-            PeopleList.Add(new PersonModel() { FirstName = "Niklas", LastName = "Hjelm" });
-            PeopleList.Add(new PersonModel() { FirstName = "Vidar", LastName = "Hjelm" });
+            _repo = new PeopleRepository();
+
+            var allAllPeople = _repo.GetAllPeople();
+
+            foreach (var person in allAllPeople)
+            {
+                PeopleList.Add(new PersonModel(){FirstName = person.FirstName, LastName = person.LastName});
+            }
         }
 
         private void UpdateBtn_OnClick(object sender, RoutedEventArgs e)
@@ -58,6 +54,8 @@ namespace WPFFleraVyer.Views
             newPerson.FirstName = EditFirstName;
             newPerson.LastName = EditLastName;
             PeopleList.Add(newPerson);
+
+            var id = _repo.AddPerson(newPerson.FirstName, newPerson.LastName);
         }
 
         private void RemovePersonBtn_OnClick(object sender, RoutedEventArgs e)
